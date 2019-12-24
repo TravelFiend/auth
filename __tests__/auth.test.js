@@ -27,7 +27,7 @@ describe('app routes', () => {
                     _id: expect.any(String),
                     email: 'me@me.com',
                     __v: 0
-                })
-            })
+                });
+            });
     });
 });
