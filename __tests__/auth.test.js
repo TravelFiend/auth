@@ -43,10 +43,11 @@ describe('app routes', () => {
             .post('/api/v1/auth/login')
             .send({ email: 'me@me.com', password: 'meme23' })
             .then(res => {
+                expect(res.header['set-cookie'][0]).toEqual(expect.stringContaining('session='));
                 expect(res.body).toEqual({
-                    _id: expect.any(String),
+                    _id: user.id,
                     email: 'me@me.com',
-                    __V: 0
+                    __v: 0
                 });
             });
     });
