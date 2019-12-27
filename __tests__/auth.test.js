@@ -51,4 +51,22 @@ describe('app routes', () => {
                 });
             });
     });
+
+    it('should fail login with bad email', async() => {
+        const user = await User.create({
+            email: 'me@me.com',
+            password: 'meme23'
+        });
+
+        return request(app)
+            .post('/api/v1/auth/login')
+            .send({ email: 'you@you.com', password: 'meme23' })
+            .then(res => {
+                expect(res.status).toEqual(401);
+                expect(res.body).toEqual({
+                    status: 401,
+                    message: 'Invalid email or password'
+                });
+            });
+    });
 });
